@@ -74,7 +74,7 @@ extension ClockView {
     
     func stop() {
         timer?.invalidate()
-        timer = nil
+        timer = nil 
     }
 }
 
