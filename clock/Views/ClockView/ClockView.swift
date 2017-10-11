@@ -35,9 +35,22 @@ class ClockView: UIView {
         return Bundle.main.loadNibNamed("ClockView", owner: nil, options: nil)![0] as! ClockView
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         configUI()
+        print("Drawing...")
+    }
+    
+    init() {
+        super.init(frame: .zero)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
     private func configUI() {
@@ -88,9 +101,12 @@ extension ClockView {
             let nanoSecond = components.nanosecond else {
                 return
         }
-        let secondAngle = ((Double(second) + pow(Double(nanoSecond),Double(-9))) / 60.0) * .pi * 2.0
-        let minuteAngle = ((Double(minute) + Double(second) / 60.0)) / 60.0 * .pi * 2.0
-        let hourAngle = ((Double(hour) + Double(minute) / 60.0)) / 12.0 * .pi * 2.0
+        let realSecond = Double(second) + pow(Double(nanoSecond),Double(-9))
+        let realMinute = Double(minute) + realSecond / 60.0
+        let realHour = Double(hour) + realMinute / 60.0
+        let secondAngle = realSecond / 60.0 * .pi * 2.0
+        let minuteAngle = realMinute / 60.0 * .pi * 2.0
+        let hourAngle = realHour / 12.0 * .pi * 2.0
         
         hourImageView?.transform = CGAffineTransform(rotationAngle: CGFloat(hourAngle))
         minuteImageView?.transform = CGAffineTransform(rotationAngle: CGFloat(minuteAngle))

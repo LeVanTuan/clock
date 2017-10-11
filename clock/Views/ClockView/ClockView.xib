@@ -86,7 +86,7 @@
                 <outlet property="secondImageView" destination="lef-74-hhZ" id="b1U-9v-Jhp"/>
                 <outlet property="secondWidth" destination="Kbl-8W-iIH" id="WXn-RL-ZBw"/>
             </connections>
-            <point key="canvasLocation" x="-137" y="-151"/>
+            <point key="canvasLocation" x="-200" y="-125"/>
         </view>
     </objects>
     <resources>
